@@ -1,0 +1,128 @@
+/* TODO
+- use body instead of .resize_wrapper 
+*/
+
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  font-family: fantasy;
+  font-size: 9vmin;
+}
+
+@property --hint-rotation {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .rotation_wrapper {
+    rotate: -90deg;
+    width: 100vh;
+    height: 100vw;
+  }
+  .csshtml,
+  .jscript {
+    width: 50vh;
+    height: 100vw;
+  }
+  a {
+    rotate: 90deg;
+  }
+  p {
+    --hint-rotation: 0deg;
+    rotate: 90deg;
+  }
+}
+
+@media (min-aspect-ratio: 1/1) {
+  .rotation_wrapper {
+    rotate: 0deg;
+  }
+  .csshtml,
+  .jscript {
+    width: 50vw;
+    height: 100vh;
+  }
+  a {
+    rotate: 0deg;
+  }
+  p {
+    --hint-rotation: 90deg;
+    rotate: 0deg;
+  }
+}
+
+@media (aspect-ratio: 1/1) {
+  .rotation_wrapper {
+    rotate: -45deg;
+    scale: 2;
+  }
+  a {
+    rotate: 45deg;
+  }
+}
+
+.resize_wrapper {
+  justify-content: center;
+  align-items: center;
+  /* the most important bits */
+  height: 100vh;
+  overflow: hidden;
+}
+
+.rotation_wrapper {
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  transition-duration: 1s;
+  display: flex;
+  flex-direction: row-reverse;
+  transform-box: fill-box;
+}
+
+div {
+  /* why this necessary? */
+  display: flex;
+}
+
+a {
+  margin: auto;
+  text-decoration: none;
+  transition-duration: 1s;
+}
+
+.csshtml {
+  background-color: white;
+}
+
+.csshtml a {
+  color: black;
+}
+
+.jscript {
+  background-color: black;
+}
+
+.jscript a {
+  color: white;
+}
+
+p {
+  transition-duration: 1s;
+  transition-property: --hint-rotation, rotate;
+  background: linear-gradient(
+    var(--hint-rotation),
+    white 0%,
+    white 50%,
+    black 51%,
+    black 100%
+  );
+  position: absolute;
+  margin: 0;
+  margin-block: 0;
+  font-weight: bold;
+  background-clip: text;
+  color: transparent;
+}
